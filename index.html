@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binance Futures Signal Dashboard</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="dot" id="live-dot"></span>
+    <h1>Binance Futures Signal Scanner</h1>
+  </div>
+  <div class="status" id="status-line">Starting…</div>
+</header>
+
+<div class="disclaimer">
+  <strong>Not financial advice.</strong> This is a rules-based technical filter, not a prediction.
+  No signal here implies or guarantees a winning trade. It never places orders — review everything
+  yourself in Binance before acting. Runs entirely in your browser; no API key is ever requested or stored.
+</div>
+
+<section class="controls">
+  <div class="field">
+    <label for="wallet-balance">Wallet balance (USDT)</label>
+    <input type="number" id="wallet-balance" min="0" step="any" placeholder="e.g. 500">
+  </div>
+  <div class="field">
+    <label for="risk-pct">Risk per trade (%)</label>
+    <input type="number" id="risk-pct" min="0.1" max="100" step="0.1" value="1">
+  </div>
+  <div class="field">
+    <label for="max-leverage">Max leverage</label>
+    <input type="number" id="max-leverage" min="1" max="125" step="1" value="10">
+  </div>
+  <div class="field">
+    <label for="min-score">Min confluence (out of 6)</label>
+    <select id="min-score">
+      <option value="3">3 — loose, frequent signals</option>
+      <option value="4">4 — moderate</option>
+      <option value="5" selected>5 — strict (recommended)</option>
+      <option value="6">6 — very strict, rare signals</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="refresh-interval">Refresh every</label>
+    <select id="refresh-interval">
+      <option value="30">30s</option>
+      <option value="60" selected>60s</option>
+      <option value="120">2 min</option>
+      <option value="300">5 min</option>
+    </select>
+  </div>
+  <div class="field field-btn">
+    <button id="scan-now">Scan now</button>
+  </div>
+</section>
+
+<section class="summary" id="summary"></section>
+
+<section id="results" class="results"></section>
+
+<footer>
+  <p>
+    Market data: Binance USDT-M Futures public API, fetched live from your browser.
+    Signals update only while this tab is open. Source on
+    <a href="https://github.com" id="repo-link" target="_blank" rel="noopener">GitHub</a>.
+  </p>
+</footer>
+
+<script src="indicators.js"></script>
+<script src="binance.js"></script>
+<script src="signals.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
